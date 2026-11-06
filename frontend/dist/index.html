@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en" data-version="thattadavu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Adavus Motion Lab — Nattadavu foot movement analysis prototype." />
+  <title>Adavus Motion Lab</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230b0b0e'/%3E%3Cpath d='M17 44 31 15h3l14 29h-8l-3-7H26l-3 7h-6Zm12-14h5l-2.5-6-2.5 6Z' fill='%23ff6b35'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="thattadavu.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand-row">
+        <div class="brand-mark" aria-hidden="true">A</div>
+        <div>
+          <div class="brand-name">Adavus</div>
+          <div class="brand-sub">Motion Lab</div>
+        </div>
+        <button class="icon-button sidebar-close" id="sidebarClose" aria-label="Close navigation">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+        </button>
+      </div>
+
+      <button class="new-analysis" id="newAnalysis">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+        New analysis
+        <span class="key">N</span>
+      </button>
+
+      <nav class="nav-block" aria-label="Primary navigation">
+        <button class="nav-item active">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V9m5 10V5m6 14v-7m5 7V3"/></svg>
+          Analyse
+        </button>
+        <button class="nav-item" data-toast="History is a visual placeholder in this review build.">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8m0-5v5h5M12 7v5l3 2"/></svg>
+          History
+        </button>
+      </nav>
+
+      <div class="sidebar-section">
+        <p class="section-label">Recent</p>
+        <button class="recent-item" id="recentDemo">
+          <span class="recent-icon">N</span>
+          <span>
+            <strong>Nattadavu 01</strong>
+            <small>20 sec · 600 frames</small>
+          </span>
+          <span class="recent-status">Ready</span>
+        </button>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="engine-state">
+          <span class="pulse-dot"></span>
+          <div><strong>RTMW3D</strong><small>133-point pose model</small></div>
+        </div>
+        <button class="icon-button" data-toast="Settings are not connected in this frontend prototype." aria-label="Settings">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.83 2.83-.06-.06a1.7 1.7 0 0 0-1.88-.34 1.7 1.7 0 0 0-1.03 1.56V21h-4v-.08A1.7 1.7 0 0 0 9 19.36a1.7 1.7 0 0 0-1.88.34l-.06.06-2.83-2.83.06-.06A1.7 1.7 0 0 0 4.63 15a1.7 1.7 0 0 0-1.56-1.03H3v-4h.08A1.7 1.7 0 0 0 4.64 9a1.7 1.7 0 0 0-.34-1.88l-.06-.06 2.83-2.83.06.06A1.7 1.7 0 0 0 9 4.63 1.7 1.7 0 0 0 10.03 3.1V3h4v.08A1.7 1.7 0 0 0 15 4.64a1.7 1.7 0 0 0 1.88-.34l.06-.06 2.83 2.83-.06.06A1.7 1.7 0 0 0 19.37 9a1.7 1.7 0 0 0 1.56 1.03H21v4h-.08A1.7 1.7 0 0 0 19.4 15Z"/></svg>
+        </button>
+      </div>
+    </aside>
+
+    <main class="main-panel">
+      <header class="topbar">
+        <button class="icon-button menu-button" id="menuButton" aria-label="Open navigation">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+        <div class="topbar-title">Nattadavu analysis</div>
+        <div class="prototype-badge"><span></span> Frontend prototype</div>
+      </header>
+
+      <div class="workspace">
+        <section class="intro" id="introSection">
+          <div class="eyebrow">BHARATANATYAM · FOOT MOVEMENT</div>
+          <h1>See every step,<br /><span>frame by frame.</span></h1>
+          <p>Upload a Nattadavu video to preview how Adavus tracks toe and heel movement across the first 20 seconds.</p>
+        </section>
+
+        <section class="upload-card" id="uploadCard">
+          <input type="file" id="videoInput" accept="video/mp4,video/quicktime,video/webm,video/x-msvideo,video/x-matroska,.mp4,.mov,.avi,.mkv,.webm" hidden />
+          <div class="drop-zone" id="dropZone" tabindex="0" role="button" aria-label="Select a Nattadavu video">
+            <div class="upload-orb">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 14v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4"/></svg>
+            </div>
+            <div class="upload-copy">
+              <strong id="uploadTitle">Drop your Nattadavu video here</strong>
+              <span id="uploadSub">MP4, MOV or WebM · analysed locally in this prototype</span>
+            </div>
+            <button class="choose-button" id="chooseButton" type="button">Choose video</button>
+          </div>
+
+          <div class="file-summary" id="fileSummary" hidden>
+            <div class="video-thumb">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"/><path d="m17 9 4-2v10l-4-2V9Z"/></svg>
+            </div>
+            <div class="file-copy"><strong id="fileName">Nattadavu_01.mp4</strong><span id="fileMeta">67.9 sec · 1920 × 1080 · first 20 sec selected</span></div>
+            <button class="remove-file" id="removeFile" type="button" aria-label="Remove selected video">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+            </button>
+          </div>
+
+          <div class="upload-footer">
+            <div class="scope-chips">
+              <span><svg viewBox="0 0 24 24"><path d="M12 8v4l2.5 2.5M21 12a9 9 0 1 1-9-9 9 9 0 0 1 9 9Z"/></svg>First 20 seconds</span>
+              <span><svg viewBox="0 0 24 24"><path d="M8 4h8M9 4v4l-4 8a3 3 0 0 0 2.7 4h8.6a3 3 0 0 0 2.7-4l-4-8V4M7 14h10"/></svg>RTMLib only</span>
+              <span><svg viewBox="0 0 24 24"><path d="M7 3h10v4H7zM5 9h14v12H5zM9 13h6M9 17h4"/></svg>4 keypoints</span>
+            </div>
+            <button class="analyse-button" id="analyseButton" type="button" disabled>
+              <span>Analyse movement</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
+            </button>
+          </div>
+        </section>
+
+        <button class="demo-link" id="demoButton" type="button">Use review sample instead</button>
+
+        <section class="processing-card" id="processingCard" hidden aria-live="polite">
+          <div class="processing-head">
+            <div><span class="spinner"></span><strong id="processingTitle">Preparing frames</strong></div>
+            <span id="progressPercent">0%</span>
+          </div>
+          <div class="progress-track"><span id="progressBar"></span></div>
+          <div class="pipeline-steps">
+            <div class="pipeline-step active"><span>01</span><div><strong>Extract frames</strong><small>0 / 600</small></div></div>
+            <div class="pipeline-step"><span>02</span><div><strong>Detect pose</strong><small>RTMW3D · 133 points</small></div></div>
+            <div class="pipeline-step"><span>03</span><div><strong>Track feet</strong><small>Toe + heel · X/Y/Z</small></div></div>
+            <div class="pipeline-step"><span>04</span><div><strong>Build results</strong><small>Graphs + CSV + video</small></div></div>
+          </div>
+        </section>
+
+        <section class="results" id="resultsSection" hidden>
+          <div class="results-header">
+            <div><div class="eyebrow">ANALYSIS COMPLETE</div><h2>Movement overview</h2></div>
+            <button class="ghost-button" data-toast="Export will be connected when the backend is integrated.">
+              <svg viewBox="0 0 24 24"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 19h14"/></svg>Export results
+            </button>
+          </div>
+          <div class="summary-grid">
+            <article><span>Frames analysed</span><strong>600</strong><small>29.995 FPS</small></article>
+            <article><span>Duration</span><strong>20.0s</strong><small>First segment</small></article>
+            <article><span>Keypoints</span><strong>4</strong><small>Toe + heel</small></article>
+            <article><span>Confidence</span><strong>98.9%</strong><small>Valid observations</small></article>
+          </div>
+          <div class="chart-grid">
+            <article class="chart-card"><div class="chart-title"><div><span class="side-dot left"></span><strong>Left big toe</strong></div><small>X / Y / Z</small></div><canvas data-seed="1" aria-label="Mock left big toe movement chart"></canvas></article>
+            <article class="chart-card"><div class="chart-title"><div><span class="side-dot left"></span><strong>Left heel</strong></div><small>X / Y / Z</small></div><canvas data-seed="2" aria-label="Mock left heel movement chart"></canvas></article>
+            <article class="chart-card"><div class="chart-title"><div><span class="side-dot right"></span><strong>Right big toe</strong></div><small>X / Y / Z</small></div><canvas data-seed="3" aria-label="Mock right big toe movement chart"></canvas></article>
+            <article class="chart-card"><div class="chart-title"><div><span class="side-dot right"></span><strong>Right heel</strong></div><small>X / Y / Z</small></div><canvas data-seed="4" aria-label="Mock right heel movement chart"></canvas></article>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+    <script src="app-v2.js"></script>
+</body>
+</html>
